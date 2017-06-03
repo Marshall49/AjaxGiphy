@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  text-align: center;
+  height: 100%;
+  font-size: 18px;
+
+}
+
+.wrapper {
+  background-image: url("../images/hiphopbackground.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#head h1 {
+  font-family: 'Orbitron', sans-serif;
+  border: 3px solid;
+  min-height: 100px;
+  background-color: white;
+  opacity: 0.7;
+
+}
+
+#foot {
+  font-family: 'Orbitron', sans-serif;
+  border: 3px solid;
+  min-height: 100px;
+  background-color: white;
+  opacity: 0.7;
+
+}
+
+#piccol {
+  margin: 10px;
+  font-family:'Orbitron', sans-serif;
+  min-height: 500px;
+  padding: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: white;
+  text-shadow: 1px 1px ;
+  border: 3px solid;
+  opacity: 0.7;
+}
+
+#maincol {
+  margin: 10px;
+  font-family:'Orbitron', sans-serif;
+  min-height: 500px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: white;
+  text-shadow: 1px 1px ;
+  border: 3px solid;
+  opacity: 0.7;
+}
+
+/*.opac {
+  opacity: 0.7;
+  background-image: url("../images/hiphopbackground.png");
+  background-position: center;
+  background-repeat: no-repeat;*/
+
+
+#dark {
+  /*background: rgba(0, 0, 0, 1);*/
+  background-color: white;
+  color:black;
+}
+
+/*p {
+  color: black;
+}*/
