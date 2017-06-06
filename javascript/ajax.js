@@ -5,15 +5,15 @@ var hiphop = ["Outkast", "Anderson Paak", "Kendrick Lamar", "J Cole", "Schoolboy
 
 
 function displayArtistButtons(){
-    $("#buttonsView").empty();
+    $("#col1").empty();
         var gifButton = $("<button>");
-        gifButton.addClass("hiphops");
+        gifButton.addClass("hiphop");
         gifButton.addClass("btn btn-primary")
         gifButton.attr("data-name", hiphop[i]);
         gifButton.text(hiphop[i]);
-        $("#buttonsView").append(gifButton);
+        $("#col1").append(gifButton);
     }
-}
+})
 
 function addNewArtist(){
     $("#add-artist").on("click", function(){
@@ -28,26 +28,32 @@ function addNewArtist(){
     });
 }
 
-
+//
 // function removeLastArtist(){
 //     $("removeGif").on("click", function(){
 //     hiphop.pop(hiphops);
 //     displayGifButtons();
 //     return false;
 //     });
-}
+
 
 function displayArtist(){
     var hiphop = $(this).attr("data-name");
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
-    console.log(queryURL); 
+    console.log(queryURL);
     $.ajax({
         url: queryURL,
         method: 'GET'
     })
     .done(function(response) {
-        console.log(response);
+        // console.log(response)
+        $("#col1").empty();
+          var results = response.....;
+        })
 
+        for (var i=0; i<results.length; i++){
+        }
+      }
 
 
 
