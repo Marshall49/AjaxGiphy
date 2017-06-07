@@ -5,28 +5,65 @@ var hiphop = ["Outkast", "Anderson Paak", "Kendrick Lamar", "J Cole", "Schoolboy
 
 
 function displayArtistButtons(){
-    $("#col1").empty();
-        var gifButton = $("<button>");
-        gifButton.addClass("hiphop");
-        gifButton.addClass("btn btn-primary")
-        gifButton.attr("data-name", hiphop[i]);
-        gifButton.text(hiphop[i]);
-        $("#col1").append(gifButton);
-    }
-})
+    $("#buttons-view").empty();
+    for (var i = 0; i < hiphop.length;i++){
 
-function addNewArtist(){
-    $("#add-artist").on("click", function(){
+        var artistButton = $("<button>");
+        artistButton.addClass("hiphop");
+        artistButton.addClass("btn btn-primary")
+        artistButton.attr("data-name", hiphop[i]);
+        artistButton.text(hiphop[i]);
+        $("#buttons-view").append(artistButton);
+    }
+  }
+
+    $("#add-artist").on("click", function(event){
+      event.preventDefault();
     var hiphops = $("#artists-input").val().trim();
     if (hiphops == ""){
       return false;
     }
-    hiphop.push(action);
+    else {
 
-    displayArtistButtons();
-    return false;
+    hiphop.push(hiphops);
+
+
+
+    // displayArtistButtons();
+  }
     });
-}
+      displayArtistButtons();
+
+    $(".hiphop").on('click', function(){
+      console.log("yea")
+      var hiphop = $(this).attr("data-name");
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
+      console.log(queryURL);
+      // $.ajax({
+      //     url: queryURL,
+      //     method: 'GET'
+      // })
+      // .done(function(response) {
+      //     // console.log(response)
+      //     $("#buttons-view").empty();
+      //       var results = response.data;
+      //
+      //
+      //     for (var i=0; i<results.length; i++){
+      //
+      //     var artistDiv = $("<div>")
+      //     artistDiv.addclass ("artistDiv");
+      //     var artistRating = $("<p>").text("Rating: " + results[i].rating);
+      //       artistDiv.append(artistRating);
+      //
+      //     var artistImage = $("<img>");
+      //       // artistImage.attr("src", results[i].)
+      //       artistImage.attr("data-animate")
+      //       artistImage.attr("data-still")
+
+    })
+
+
 
 //
 // function removeLastArtist(){
@@ -37,36 +74,54 @@ function addNewArtist(){
 //     });
 
 
-function displayArtist(){
-    var hiphop = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
-    console.log(queryURL);
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    })
-    .done(function(response) {
-        // console.log(response)
-        $("#col1").empty();
-          var results = response.....;
-        })
+// function displayArtist(){
+//   console.log("")
+//     var hiphop = $(this).attr("data-name");
+//     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
+//     console.log(queryURL);
+//     $.ajax({
+//         url: queryURL,
+//         method: 'GET'
+//     })
+//     .done(function(response) {
+//         // console.log(response)
+//         $("#buttons-view").empty();
+//           var results = response.data;
+//
+//
+//         for (var i=0; i<results.length; i++){
+//
+//         var artistDiv = $("<div>")
+//         artistDiv.addclass ("artistDiv");
+//         var artistRating = $("<p>").text("Rating: " + results[i].rating);
+//           artistDiv.append(artistRating);
+//
+//         var artistImage = $("<img>");
+//           // artistImage.attr("src", results[i].)
+//           artistImage.attr("data-animate")
+//           artistImage.attr("data-still")
+//
 
-        for (var i=0; i<results.length; i++){
-        }
+    //     }
+    //   })
+    // }
+
+
+
+
+
+
+
+
+    $(".add-artist").on("click", function() {
+
+      var hiphop = $(this).attr("data-state");
+      if (hiphop === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
       }
-
-
-
-
-
-    // $(".gif").on("click", function() {
-    //
-    //   var state = $(this).attr("data-state");
-    //   if (state === "still") {
-    //     $(this).attr("src", $(this).attr("data-animate"));
-    //     $(this).attr("data-state", "animate");
-    //   } else {
-    //     $(this).attr("src", $(this).attr("data-still"));
-    //     $(this).attr("data-state", "still");
-    //   }
-    // });
+    });
+})
