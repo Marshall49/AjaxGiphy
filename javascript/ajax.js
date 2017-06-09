@@ -15,55 +15,73 @@ function displayArtistButtons(){
         artistButton.text(hiphop[i]);
         $("#buttons-view").append(artistButton);
     }
-  }
+}
 
-    $("#add-artist").on("click", function(event){
-      event.preventDefault();
+$("#add-artist").on("click", function(event){
+    event.preventDefault();
     var hiphops = $("#artists-input").val().trim();
+    console.log(hiphops)
     if (hiphops == ""){
       return false;
     }
     else {
-
     hiphop.push(hiphops);
-
-
-
-    // displayArtistButtons();
+    displayArtistButtons()
   }
-    });
-      displayArtistButtons();
+});
 
-    $(".hiphop").on('click', function(){
+displayArtistButtons();
+
+$(".hiphop").on('click', function(){
       console.log("yea")
       var hiphop = $(this).attr("data-name");
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
       console.log(queryURL);
-      // $.ajax({
-      //     url: queryURL,
-      //     method: 'GET'
-      // })
-      // .done(function(response) {
-      //     // console.log(response)
-      //     $("#buttons-view").empty();
-      //       var results = response.data;
+      $.ajax({
+          url: queryURL,
+          method: 'GET'
+      })
+      .done(function(response) {
+          // console.log(response)
+          $("#buttons-view").empty();
+           displayArtistButtons();
+            var results = response.data;
+            console.log(response)
+            var something = (response.data[0].embed_url)
+            console.log(something)
       //
+          // for (var i=0; i<results.length; i++){
+          //
+          // var artistDiv = $("<div>")
+          // artistDiv.addClass("artistDiv");
+          // var artistRating = $("<p>").text("Rating: " + results.rating);
+          //   artistDiv.append(artistRating);
       //
-      //     for (var i=0; i<results.length; i++){
-      //
-      //     var artistDiv = $("<div>")
-      //     artistDiv.addclass ("artistDiv");
-      //     var artistRating = $("<p>").text("Rating: " + results[i].rating);
-      //       artistDiv.append(artistRating);
-      //
-      //     var artistImage = $("<img>");
-      //       // artistImage.attr("src", results[i].)
-      //       artistImage.attr("data-animate")
-      //       artistImage.attr("data-still")
+      var img = $('<img />', {
+          id: 'Myid',
+          src: something,
+          alt: 'MyAlt'
+        });
+        img.appendTo($('#artist-view'));
 
-    })
+          var artistImage = $("<img>");
+          artistImage.attr('src', something);
+          console.log(artistImage)
+          // $("artistImage").appendTo($('#artist-view'));
+          artistImage.appendTo("artist-view");
+        // artistImage.attr("src", results[i].data.fixed_height.url); // still image stored into src of image
+        // artistImage.attr("data-still",results[i].data.fixed_height.url); // still image
+        // artistImage.attr("data-animate",results[i].data.fixed_height.url); // animated image
+        // artistImage.attr("data-state", "still"); // set the image state
+        // artistImage.addClass("image");
+        // artistDiv.append(artistImage);
+        // $("#buttons-view").prepend(artistDiv);
 
+    // }
+  })
+})
 
+// displayArtistButtons();
 
 //
 // function removeLastArtist(){
@@ -105,13 +123,6 @@ function displayArtistButtons(){
     //     }
     //   })
     // }
-
-
-
-
-
-
-
 
     $(".add-artist").on("click", function() {
 
