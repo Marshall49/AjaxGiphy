@@ -15,7 +15,7 @@ body {
 
 }
 
-#col1 {
+#artist-view {
   margin: 10px;
   text-decoration-color: red;
   font-family:'Orbitron', sans-serif;
@@ -31,15 +31,3 @@ body {
   position: relative;
   z-index: 10;
 }
-
-
-#artist-form {
-  text-decoration-color: red;
-}
-/*
-#artist-view {
-  position: relative;
-  z-index: 11;
-  height: 100px;
-  background-color:red
-}*/

@@ -1,7 +1,7 @@
 
 $( document ).ready(function() {
 
-var hiphop = ["Outkast", "Anderson Paak", "Kendrick Lamar", "J Cole", "Schoolboy Q", "Ludacris", "T.I.", "Drake", "Lil Wayne"]
+var hiphop = ["Outkast", "Anderson Paak", "Kendrick Lamar", "J Cole", "Ice Cube", "Ludacris", "T.I.", "Drake", "Lil Wayne"]
 
 
 function displayArtistButtons(){
@@ -15,6 +15,42 @@ function displayArtistButtons(){
         artistButton.text(hiphop[i]);
         $("#buttons-view").append(artistButton);
     }
+
+    $(".hiphop").on('click', function(){
+          console.log("yea")
+          var hiphop = $(this).attr("data-name");
+          console.log(hiphop)
+          var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
+          console.log(queryURL);
+          $.ajax({
+              url: queryURL,
+              method: 'GET'
+          })
+          .done(function(response) {
+              // console.log(response)
+            displayArtistButtons();
+            var results = response.data;
+              $("#artist-view").empty();
+            for (var i=0; i < results.length; i++){
+              var rating = results[i].rating;
+              var p = $("<p>").text("Rating: " + rating);
+              var image = (response.data[i].images.fixed_height.url)
+                var img = $('<img />', {
+                  id: 'Myid',
+                  src: image,
+                  alt: 'MyAlt',
+                class: 'music'
+                });
+                img.attr("data-state", "still");
+                // img.attr("data-still", still);
+                // img.attr("data-animate", animate);
+                // $("#artist-view").empty();
+                img.appendTo($('#artist-view'));
+                p.appendTo($('#artist-view'));
+            }
+
+        });
+      });
 }
 
 $("#add-artist").on("click", function(event){
@@ -35,6 +71,7 @@ displayArtistButtons();
 $(".hiphop").on('click', function(){
       console.log("yea")
       var hiphop = $(this).attr("data-name");
+      console.log(hiphop)
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + hiphop + "&api_key=dc6zaTOxFJmzC&limit=10";
       console.log(queryURL);
       $.ajax({
@@ -42,30 +79,34 @@ $(".hiphop").on('click', function(){
           method: 'GET'
       })
       .done(function(response) {
-        // console.log(response)
-      $("#buttons-view").empty();
-      displayArtistButtons();
-      var results = response.data;
-      for (var i=0; i < results.length; i++){
-      var image = (response.data[1].images.fixed_height.url)
-        var img = $('<img />', {
-          id: 'Myid',
-          src: image,
-          alt: 'MyAlt'
-        });
-        img.appendTo($('#col1'));
-        var artistImage = $("<img>");
-        artistImage.attr('src', image);
-        console.log(artistImage);
-        artistImage.appendTo("col1");
-}
+          // console.log(response)
+        $("#buttons-view").empty();
+        displayArtistButtons();
+        var results = response.data;
+        $("#artist-view").empty();
+        for (var i=0; i < results.length; i++){
+          var rating = results[i].rating;
+          var p = $("<p>").text("Rating: " + rating);
+          var image = (response.data[i].images.fixed_height.url)
+            var img = $('<img />', {
+              id: 'Myid',
+              src: image,
+              alt: 'MyAlt',
+            class: 'music',
+            // attr:"still"
+            });
 
-        })
+            // $("#artist-view").empty();
+              displayArtistButtons();
+            img.attr("data-state", "still");
+            // img.attr("data-still", still);
+            // img.attr("data-animate", animate);
+            img.appendTo($('#artist-view'));
+            p.appendTo($('#artist-view'));
+        }
 
-          var artistDiv = $("<div>")
-          artistDiv.addClass("artistDiv");
-          var artistRating = $("<p>").text("Rating: " + results.rating);
-            artistDiv.append(artistRating);
+    });
+  });
       //
 
         // artistImage.attr("src", results[i].data.fixed_height.url); // still image stored into src of image
@@ -75,11 +116,6 @@ $(".hiphop").on('click', function(){
         // artistImage.addClass("image");
         // artistDiv.append(artistImage);
         // $("#buttons-view").prepend(artistDiv);
-
-    // }
-  })
-})
-
 // displayArtistButtons();
 
 //
@@ -123,14 +159,19 @@ $(".hiphop").on('click', function(){
     //   })
     // }
 
-    $(".hiphop").on("click", function() {
+    $(".music").on("click", function() {
+      console.log("listen")
 
-      var hiphop = $(this).attr("data-state");
-      if (hiphop === "still") {
+      var state = $(this).attr("data-state");
+      console.log(state)
+      if (state === "still") {
+        console.log("yeyey")
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
       } else {
+        console.log("niii")
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
       }
     });
+    })
