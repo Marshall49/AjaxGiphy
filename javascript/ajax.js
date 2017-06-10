@@ -42,33 +42,32 @@ $(".hiphop").on('click', function(){
           method: 'GET'
       })
       .done(function(response) {
-          // console.log(response)
-          $("#buttons-view").empty();
-           displayArtistButtons();
-            var results = response.data;
-            console.log(response)
-            var something = (response.data[0].embed_url)
-            console.log(something)
-      //
-          // for (var i=0; i<results.length; i++){
-          //
-          // var artistDiv = $("<div>")
-          // artistDiv.addClass("artistDiv");
-          // var artistRating = $("<p>").text("Rating: " + results.rating);
-          //   artistDiv.append(artistRating);
-      //
-      var img = $('<img />', {
+        // console.log(response)
+      $("#buttons-view").empty();
+      displayArtistButtons();
+      var results = response.data;
+      for (var i=0; i < results.length; i++){
+      var image = (response.data[1].images.fixed_height.url)
+        var img = $('<img />', {
           id: 'Myid',
-          src: something,
+          src: image,
           alt: 'MyAlt'
         });
-        img.appendTo($('#artist-view'));
+        img.appendTo($('#col1'));
+        var artistImage = $("<img>");
+        artistImage.attr('src', image);
+        console.log(artistImage);
+        artistImage.appendTo("col1");
+}
 
-          var artistImage = $("<img>");
-          artistImage.attr('src', something);
-          console.log(artistImage)
-          // $("artistImage").appendTo($('#artist-view'));
-          artistImage.appendTo("artist-view");
+        })
+
+          var artistDiv = $("<div>")
+          artistDiv.addClass("artistDiv");
+          var artistRating = $("<p>").text("Rating: " + results.rating);
+            artistDiv.append(artistRating);
+      //
+
         // artistImage.attr("src", results[i].data.fixed_height.url); // still image stored into src of image
         // artistImage.attr("data-still",results[i].data.fixed_height.url); // still image
         // artistImage.attr("data-animate",results[i].data.fixed_height.url); // animated image
@@ -124,7 +123,7 @@ $(".hiphop").on('click', function(){
     //   })
     // }
 
-    $(".add-artist").on("click", function() {
+    $(".hiphop").on("click", function() {
 
       var hiphop = $(this).attr("data-state");
       if (hiphop === "still") {
@@ -135,4 +134,3 @@ $(".hiphop").on('click', function(){
         $(this).attr("data-state", "still");
       }
     });
-})
